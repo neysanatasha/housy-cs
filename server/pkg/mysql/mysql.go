@@ -17,11 +17,9 @@ func DatabaseInit() {
 	var DB_NAME = os.Getenv("DB_NAME")
 	var DB_PORT = os.Getenv("DB_PORT")
 	var err error
-	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s", DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME)
-	DB, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
+	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=True&loc=Local", DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME)
 	// dsn := "root:root@tcp(127.0.0.1:3306)/db_housy_mux?charset=utf8mb4&parseTime=True&loc=Local"
-	// DB, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
-
+	DB, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
 		panic(err)
 	}
